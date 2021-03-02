@@ -141,7 +141,7 @@ class SudoUserTestHelper {
                 name: "testRegisterAudience",
                 key: testKey,
                 keyId: testKeyId,
-                keyMananger: authProviderKeyManager)
+                keyManager: authProviderKeyManager)
         }
         else {
             throw NSError(domain: "SudoUserTestHelper", code: 0, userInfo: [NSLocalizedDescriptionKey: "Missing register_key.private and register_key.id.  Please make sure the correct files are copied to the testing bundle"])
