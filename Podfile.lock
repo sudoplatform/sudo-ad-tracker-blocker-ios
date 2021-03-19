@@ -25,11 +25,11 @@ PODS:
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
   - Starscream (3.1.1)
-  - SudoConfigManager (1.3.0):
+  - SudoConfigManager (1.4.0):
     - SudoLogging (~> 0.2)
   - SudoKeyManager (1.2.0)
   - SudoLogging (0.3.1)
-  - SudoUser (10.2.0):
+  - SudoUser (11.0.0):
     - AWSAppSync (~> 3.1.14)
     - AWSCognitoIdentityProvider (~> 2.22.0)
     - AWSCore (~> 2.22.0)
@@ -41,7 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - SudoLogging (~> 0.3)
-  - SudoUser (~> 10.0)
+  - SudoUser (< 12.0, >= 10.0)
 
 SPEC REPOS:
   trunk:
@@ -73,11 +73,11 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SudoConfigManager: 7b38c594df2233ae69508d78123b1c628baef153
+  SudoConfigManager: 41c6f94df155ff920096c08f1d6250fc3812a9ff
   SudoKeyManager: 14159babc8ad32c5ebc41e075fe0164b82e730b1
   SudoLogging: 3a469c7db097b4813d967597d7a62cfd1b580966
-  SudoUser: 44113851a855bde06ea116a5bb190e26bf0b30dd
+  SudoUser: a6395a90d5ed5e484a95697ae46ab0fa49032b86
 
 PODFILE CHECKSUM: 9202e5b28cd745063816264f2dbce102bc496a3d
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
