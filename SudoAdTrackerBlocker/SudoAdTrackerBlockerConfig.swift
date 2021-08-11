@@ -25,7 +25,13 @@ public class SudoAdTrackerBlockerConfig {
     public let bucket: String
 
     /// Creates a config specifying all the required parameters. Most useful for testing
-    public init(userClient: SudoUserClient, region: String, poolId: String, identityPoolId: String, bucket: String) {
+    public init(
+        userClient: SudoUserClient,
+        region: String,
+        poolId: String,
+        identityPoolId: String,
+        bucket: String
+    ) {
         self.userClient = userClient
         self.region = region
         self.poolId = poolId
@@ -34,7 +40,7 @@ public class SudoAdTrackerBlockerConfig {
         self.regionType = AWSRegionType.regionTypeForString(regionString: region)
     }
 
-    /// Creates a config by reading a config values from SudoConfigManager.
+    /// Creates a config by reading values from SudoConfigManager.
     public init(userClient: SudoUserClient, config: SudoConfigManager) throws {
         self.userClient = userClient
 
@@ -42,10 +48,14 @@ public class SudoAdTrackerBlockerConfig {
             throw ConfigError.missingKey
         }
 
-        guard let region = identityConfig["region"] as? String,
+        guard let siteReputationService = config.getConfigSet(namespace: "adTrackerBlockerService") else {
+            throw ConfigError.missingKey
+        }
+
+        guard let region = siteReputationService["region"] as? String,
               let poolId = identityConfig["poolId"] as? String,
               let identityPoolId = identityConfig["identityPoolId"] as? String,
-              let staticDataBucket = identityConfig["staticDataBucket"] as? String else {
+              let staticDataBucket = siteReputationService["bucket"] as? String else {
             throw ConfigError.missingKey
         }
 

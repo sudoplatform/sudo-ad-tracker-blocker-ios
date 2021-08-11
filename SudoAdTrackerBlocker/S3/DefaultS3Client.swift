@@ -29,7 +29,7 @@ class DefaultS3Client: S3Client {
     let config: AWSServiceConfiguration
 
     /// Lists formatted for Apple platforms have an "apple" path in the key. The entire prefix needs to be specified to get filtering support from S3.
-    var bucketPrefixFilter: String? = "/ad-tracker-blocker/filter-lists/apple"
+    var bucketPrefixFilter: String? = "/filter-lists/apple"
 
     init(awsServiceConfig: AWSServiceConfiguration) {
         self.config = awsServiceConfig

@@ -35,6 +35,8 @@
 		CE362E9F258BFB56004A56D8 /* ExceptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */; };
 		CE362EAA25912C05004A56D8 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */; };
 		DF542C73F1704718126CEF64 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802191EFB4D150492D14C759 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework */; };
+		E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */; };
+		E2BF3AC426BB368C00A16FD9 /* testConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BF3AC326BB368C00A16FD9 /* testConfig.json */; };
 		F7C9E815C94B272ECBD546D7 /* Pods_SudoAdTrackerBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066C895C28D8D11D6F1AC1E /* Pods_SudoAdTrackerBlocker.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +106,8 @@
 		CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerBuilder.swift; sourceTree = "<group>"; };
 		CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionProvider.swift; sourceTree = "<group>"; };
 		CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
+		E2BF3AC326BB368C00A16FD9 /* testConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfig.json; sourceTree = "<group>"; };
 		ECA7936540FD072F0C0E471E /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,6 +223,7 @@
 		3290A54D2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests */ = {
 			isa = PBXGroup;
 			children = (
+				E2BF3AC026BB2F2700A16FD9 /* ConfigTests */,
 				327D6A5525897D1E0044137B /* testRuleset.json */,
 				3290A5502562FAD500AAC0A4 /* Info.plist */,
 				325BC6D225895AA4001AE24C /* ContentBlockerBuilderTests.swift */,
@@ -268,6 +273,15 @@
 				2D3AD7FC5E1676202A775EC8 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E2BF3AC026BB2F2700A16FD9 /* ConfigTests */ = {
+			isa = PBXGroup;
+			children = (
+				E2BF3AC326BB368C00A16FD9 /* testConfig.json */,
+				E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */,
+			);
+			path = ConfigTests;
 			sourceTree = "<group>";
 		};
 		F0F053F207A26EA99E53169F /* Frameworks */ = {
@@ -443,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				327D6A5625897D1E0044137B /* testRuleset.json in Resources */,
+				E2BF3AC426BB368C00A16FD9 /* testConfig.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +660,7 @@
 				325BC6D325895AA4001AE24C /* ContentBlockerBuilderTests.swift in Sources */,
 				320BF725257ED393004D359F /* StorageTests.swift in Sources */,
 				320BF6D5257E9F9D004D359F /* MockS3Client.swift in Sources */,
+				E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */,
 				3290A54F2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

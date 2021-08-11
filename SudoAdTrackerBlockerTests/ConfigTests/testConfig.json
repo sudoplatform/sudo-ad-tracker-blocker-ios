@@ -1,0 +1,46 @@
+{
+    "adTrackerBlockerService": {
+        "bucket": "atb-s3-sbt-dev-static0r0a0bucketebb21caf-1niqbifrp2fvl",
+        "region": "us-east-1"
+    },
+    "adminConsoleProjectService": {
+        "apiUrl": "https://377zwua6qzak3jb4l5ak5tfhsm.appsync-api.us-east-1.amazonaws.com/graphql",
+        "clientId": "6odopjd6h2vv30pfgcfgpd1s2g",
+        "region": "us-east-1",
+        "userPoolId": "us-east-1_uLMuP7fUJ"
+    },
+    "apiService": {
+        "apiUrl": "https://r7lcs63pnnc2to3thggmr2i6vq.appsync-api.us-east-1.amazonaws.com/graphql",
+        "instanceName": "sbt-dev",
+        "region": "us-east-1",
+        "simulatorApiUrl": "https://qphe6pn3ivgrfooam5ozsfn4wi.appsync-api.us-east-1.amazonaws.com/graphql"
+    },
+    "entitlementsService": {},
+    "federatedSignIn": {
+        "appClientId": "mnpkhjprd265lgp22pg0f3vtj",
+        "refreshTokenLifetime": 60,
+        "signInRedirectUri": "http://localhost:3000/callback,com.sudoplatform.adtrackerblockerexample://,com.sudoplatform.sitereputationexample://,https://sbt-dev-sudoplatform.auth.us-east-1.amazoncognito.com/,https://safe-browsing-team.dev.sudoplatform.com/redirect_uri.html",
+        "signOutRedirectUri": "http://localhost:3000,com.sudoplatform.adtrackerblockerexample://,com.sudoplatform.sitereputationexample://,https://sbt-dev-sudoplatform.auth.us-east-1.amazoncognito.com/,https://safe-browsing-team.dev.sudoplatform.com/redirect_uri.html",
+        "webDomain": "sbt-dev-sudoplatform.auth.us-east-1.amazoncognito.com"
+    },
+    "identityService": {
+        "apiKey": "da2-xejsa343urfifmzkycmz3rqdom",
+        "apiUrl": "https://trejjdo3lzhmpetlcahc63war4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "bucket": "ids-userdata-sbt-dev-userdatabucket2d841c35-1pc0xrhwhlf0h",
+        "clientId": "mnpkhjprd265lgp22pg0f3vtj",
+        "identityPoolId": "us-east-1:f1052db1-2243-4070-bf31-0658c06cf986",
+        "poolId": "us-east-1_XmpKiaLzp",
+        "refreshTokenLifetime": 60,
+        "region": "us-east-1",
+        "registrationMethods": [
+            "TEST",
+            "FSSO"
+        ],
+        "staticDataBucket": "ids-staticdata-sbt-dev-staticdatabucket89bd4eab-1lrhxu49ujnky",
+        "transientBucket": "ids-userdata-sbt-dev-transientuserdatabucket0d043-upzs5xb6vzju"
+    },
+    "siteReputationService": {
+        "bucket": "srs-s3-sbt-dev-static0r0a0bucketebb21caf-bt529xmv4cju",
+        "region": "us-east-1"
+    }
+}
