@@ -37,7 +37,7 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/ad-tracker-blocker/ad-tracker-blocker-ios/sudo-ad-tracker-blocker-ios-gh/SudoAdTrackerBlocker/SudoAdTrackerBlockerClient.swift",
-      "line": 59,
+      "line": 60,
       "symbol": "DefaultSudoAdTrackerBlockerClient",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
