@@ -1,7 +1,7 @@
 target 'SudoAdTrackerBlocker' do
   use_frameworks!
 
-  platform :ios, '14.0'
+  platform :ios, '13.0'
 
   podspec :name => 'SudoAdTrackerBlocker'
 

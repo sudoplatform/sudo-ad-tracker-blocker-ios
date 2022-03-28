@@ -15,8 +15,6 @@ import SudoUser
 import SudoConfigManager
 import WebKit
 
-extension String: Error {}
-
 class SudoAdTrackerBlockerIntegrationTests: XCTestCase {
 
     var sudoUserHelper: SudoUserTestHelper!
@@ -24,20 +22,13 @@ class SudoAdTrackerBlockerIntegrationTests: XCTestCase {
     var store: WKContentRuleListStore!
 
     override func setUpWithError() throws {
-        let e = expectation(description: "")
         try self.sudoUserHelper = SudoUserTestHelper()
         let clientConfig = try SudoAdTrackerBlockerConfig(userClient: self.sudoUserHelper.sudoUserClient)
         self.client = DefaultSudoAdTrackerBlockerClient(config: clientConfig)
-
-        Task {
-            try await self.client.reset()
-            e.fulfill()
-        }
+        try self.client.reset()
 
         let storeURL = FileManager.default.temporaryDirectory
         self.store = WKContentRuleListStore.init(url: storeURL)
-
-        self.waitForExpectations(timeout: 10)
     }
 
     override func tearDownWithError() throws {
@@ -45,35 +36,49 @@ class SudoAdTrackerBlockerIntegrationTests: XCTestCase {
             XCTFail()
             return
         }
-        let e = expectation(description: "")
-        Task {
-            try await self.sudoUserHelper.deregister()
-            try await self.client.reset()
-            e.fulfill()
-        }
-        self.waitForExpectations(timeout: 10)
+        try self.sudoUserHelper.deregister()
+        try self.client.reset()
     }
 
     /// Tests that we can list the rulesets and that a ruleset can be compiled
-    func testListAndCompileRulesets() async throws {
-        try await self.sudoUserHelper.registerAndSignIn()
-        
-        let rulesets = try await self.client.listRulesets()
-        XCTAssertGreaterThan(rulesets.count , 0)
-        guard let easyPrivacy = rulesets.filter({$0.name.contains("easyprivacy")}).first else {
-            XCTFail("easyprivacy not found, cannot test list compilation.")
-            throw "easyprivacy not found, cannot test list compilation."
+    func testListAndCompileRulesets() throws {
+        try self.sudoUserHelper.registerAndSignIn()
+
+        let listExpectation = self.expectation(description: "Waiting for list rulesets")
+        self.client.listRulesets { result in
+            switch result {
+            case .success(let rulesets):
+                XCTAssertGreaterThan(rulesets.count , 0)
+                guard let easyprivacy = rulesets.filter({$0.name.contains("easyprivacy")}).first else {
+                    XCTFail("easyprivacy not found, cannot test list compilation.")
+                    return
+                }
+                self.testContentBlockerCompiles(ruleset: easyprivacy) {
+                    listExpectation.fulfill()
+                }
+            case .failure(let error):
+                XCTFail("List failed with error: \(error)")
+                listExpectation.fulfill()
+            }
         }
-        do {
-            try await self.testContentBlockerCompiles(ruleset: easyPrivacy)
-        } catch {
-            XCTFail("Ruleset not compiled.")
-        }
+
+        self.waitForExpectations(timeout: 60*5, handler: nil)
     }
 
-    func testContentBlockerCompiles(ruleset: Ruleset) async throws {
-        let blocker = try await self.client.getContentBlocker(ruleset: ruleset)
-        try await self.store.compileContentRuleList(forIdentifier: blocker.id, encodedContentRuleList: blocker.rulesetData)
+    func testContentBlockerCompiles(ruleset: Ruleset, completion: @escaping () -> Void) {
+        self.client.getContentBlocker(ruleset: ruleset) { (result) in
+            guard let blocker = try? result.get() else {
+                XCTFail()
+                completion()
+                return
+            }
+            DispatchQueue.main.async {
+                self.store.compileContentRuleList(forIdentifier: blocker.id, encodedContentRuleList: blocker.rulesetData, completionHandler: { (list, error) in
+                    XCTAssertNil(error)
+                    completion()
+                })
+            }
+        }
     }
 }
 
@@ -113,6 +118,9 @@ class SudoUserTestHelper {
     init() throws {
         let SudoUserClient = try DefaultSudoUserClient(keyNamespace: "ids")
         self.sudoUserClient = SudoUserClient
+
+        try self.sudoUserClient.reset()
+
         // Create a key manager to be used by the test authentication provider.
         let authProviderKeyManager = SudoKeyManagerImpl(
             serviceName: "com.sudoplatform.appservicename",
@@ -140,32 +148,102 @@ class SudoUserTestHelper {
         }
     }
 
-    func reset() async throws {
-        try await self.sudoUserClient.reset()
+    deinit {
+        self.reset()
     }
 
-    // If registered, then deregister and then reset
-    func deregister() async throws {
-        if try await self.sudoUserClient.isRegistered() {
-            _ = try await self.sudoUserClient.deregister()
+    func reset() {
+        do {
+            try self.sudoUserClient.reset()
         }
-        try await self.sudoUserClient.reset()
-    }
-
-    // If not registered, then register
-    func register() async throws {
-        if try await !self.sudoUserClient.isRegistered() {
-            _ = try await self.sudoUserClient.registerWithAuthenticationProvider(authenticationProvider: self.testAuthenticationProvider, registrationId: "dummy_rid")
+        catch {
+            print("Failed to reset sudo user client: \(error)")
         }
     }
 
-    func signIn() async throws {
-        _ = try await self.sudoUserClient.signInWithKey()
+    func deregister(timeout: Int = 20) throws {
+
+        guard self.sudoUserClient.isRegistered() else {
+            return
+        }
+
+        let group = DispatchGroup()
+        var deregisterError: Error?
+        group.enter()
+        try self.sudoUserClient.deregister { (result) in
+            switch result {
+            case .success:
+                break
+            case let .failure(cause):
+                deregisterError = cause
+            }
+            group.leave()
+        }
+
+        if group.wait(timeout: DispatchTime.now() + .seconds(timeout)) == .success {
+            try self.sudoUserClient.reset()
+            if let error = deregisterError {
+                throw error
+            }
+        }
+        else {
+            try self.sudoUserClient.reset()
+            throw NSError(domain: "SudoUserTestHelper", code: 0, userInfo: [NSLocalizedDescriptionKey: "De-register timeout exceeded"])
+        }
     }
 
-    func registerAndSignIn() async throws {
-        try await self.register()
-        try await self.signIn()
+    func register(timeout: Int = 20) throws {
+        guard !self.sudoUserClient.isRegistered() else {
+            return
+        }
+
+        let group = DispatchGroup()
+        var registerError: Error?
+        group.enter()
+        try self.sudoUserClient.registerWithAuthenticationProvider(authenticationProvider: self.testAuthenticationProvider, registrationId: "dummy_rid") { (result) in
+            if case .failure(let error) = result {
+                registerError = error
+            }
+            group.leave()
+        }
+
+        if group.wait(timeout: DispatchTime.now() + .seconds(timeout)) == .success {
+            if let error = registerError {
+                throw error
+            }
+        }
+        else {
+            throw NSError(domain: "SudoUserTestHelper", code: 0, userInfo: [NSLocalizedDescriptionKey: "Register timeout exceeded"])
+        }
+    }
+
+    func signIn(timeout: Int = 20) throws {
+        try self.register()
+
+        let group = DispatchGroup()
+        var signInError: Error?
+        group.enter()
+
+        try self.sudoUserClient.signInWithKey { (result) in
+            if case .failure(let error) = result {
+                signInError = error
+            }
+            group.leave()
+        }
+
+        if group.wait(timeout: DispatchTime.now() + .seconds(timeout)) == .success {
+            if let error = signInError {
+                throw error
+            }
+        }
+        else {
+            throw NSError(domain: "SudoUserTestHelper", code: 0, userInfo: [NSLocalizedDescriptionKey: "Signin timeout exceeded"])
+        }
+    }
+
+    func registerAndSignIn(timeout: Int = 20) throws {
+        try self.register()
+        try self.signIn()
     }
 }
 

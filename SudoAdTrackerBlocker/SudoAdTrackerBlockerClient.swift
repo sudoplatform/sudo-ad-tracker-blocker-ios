@@ -15,42 +15,41 @@ import SudoLogging
 public typealias BlockingException = String
 
 public protocol SudoAdTrackerBlockerClient {
-
+    ///
     /// Lists all available RuleSets and their metadata.
     /// Like a command line "ls" command
-    ///   - Parameters:
-    ///     - returns: List of available rulesets
-    func listRulesets() async throws -> [Ruleset]
+    ///
+    func listRulesets(completion: @escaping (Result<[Ruleset], Error>) -> Void)
 
     /// Fetches the base ruleset data from the service.
     /// - Parameters:
     ///   - ruleset: Ruleset to fetch
-    ///   - returns: Ruleset Data when available. Ruleset contents are cached for performance.
-    func getRuleset(ruleset: Ruleset) async throws -> Data
+    ///   - completion: Completion handler when the ruleset is available. Ruleset contents are cached for performance.
+    func getRuleset(ruleset: Ruleset, completion: @escaping (Result<Data, Error>) -> Void)
 
     /// Generates a content blocker ruleset from the base provided by the service combined with
     /// exceptions added to the client.
     /// - Parameters:
     ///   - ruleset: The ruleset to fetch and apply
-    ///   - returns: Content Blocker when available
-    func getContentBlocker(ruleset: Ruleset) async throws -> ContentBlocker
+    ///   - completion: completion handler when the content blocker is available.
+    func getContentBlocker(ruleset: Ruleset, completion: @escaping (Result<ContentBlocker, Error>) -> Void)
 
     /// Get all exceptions that have been added.
-    func getExceptions() async -> [BlockingException]
+    func getExceptions() -> [BlockingException]
 
     /// Add new exceptions
     /// - Parameter exceptions: The exceptions to add
-    func addExceptions(_ exceptions: [BlockingException]) async
+    func addExceptions(_ exceptions: [BlockingException])
 
     /// Removes exceptions
     /// - Parameter exceptions: The exceptions to remove
-    func removeExceptions(_ exceptions: [BlockingException]) async
+    func removeExceptions(_ exceptions: [BlockingException])
 
     /// Removes all exceptions
-    func removeAllExceptions() async
+    func removeAllExceptions()
 
     /// Resets any cached data and exceptions
-    func reset() async throws
+    func reset() throws
 }
 
 enum AdTrackerBlockerError: Error {
@@ -77,26 +76,31 @@ public class DefaultSudoAdTrackerBlockerClient: SudoAdTrackerBlockerClient {
         self.s3Client = s3Client
         self.exceptionProvider = exceptionProvider
     }
-    
+
     /// Lists rulesets provided by the service.
-    /// - Parameter returns: List of rulesets to be called when data is available.
-    public func listRulesets() async throws -> [Ruleset] {
-        let output = try await s3Client.listObjectsV2In(bucket: config.bucket)
-        return output.contents?.compactMap({ Ruleset(s3Object: $0)}) ?? []
+    /// - Parameter completion: Completion handler to be called when data is available.
+    public func listRulesets(completion: @escaping (Result<[Ruleset], Error>) -> Void) {
+        // docs say default limit is 1000 records.  As we only intend to host far fewer than that we don't need to deal with fetching more atm.
+        s3Client.listObjectsV2In(bucket: config.bucket) { (result) in
+            completion(result.map { (output) -> [Ruleset] in
+                let meta = output.contents?.compactMap({ Ruleset(s3Object: $0)})
+                return meta ?? []
+            })
+        }
     }
 
     /// Fetches the base ruleset data from the service.
     /// - Parameters:
     ///   - ruleset: Ruleset to fetch
-    ///   - return: Ruleset Data
-    ///   - throws: When no data is cached and downloading fails.
-     public func getRuleset(ruleset: Ruleset) async throws -> Data {
-        if let cachedRuleset = await storageProvider.read(ruleset: ruleset), cachedRuleset.meta.eTag == ruleset.eTag {
+    ///   - completion: Completion handler when the ruleset is available. Ruleset contents are cached for performance.
+    public func getRuleset(ruleset: Ruleset, completion: @escaping (Result<Data, Error>) -> Void) {
+        if let cachedRuleset = storageProvider.read(ruleset: ruleset), cachedRuleset.meta.eTag == ruleset.eTag {
             Logger.shared.debug("Found cached ruleset for \(ruleset.id), skipping download")
-            return cachedRuleset.data
+            completion(.success(cachedRuleset.data))
+            return
         } else {
-            Logger.shared.debug("No cached ruleset for \(ruleset.id) found, fetching from service")
-            return try await downloadDataFor(ruleset: ruleset)
+            Logger.shared.debug("No cached ruleset for \(ruleset.id) found, fetching from service.")
+            self.downloadDataFor(ruleset: ruleset, completion: completion)
         }
     }
 
@@ -104,93 +108,58 @@ public class DefaultSudoAdTrackerBlockerClient: SudoAdTrackerBlockerClient {
     /// exceptions added to the client.
     /// - Parameters:
     ///   - ruleset: The base ruleset from the service
-    ///   - returns: Content Blocker when available
-    ///   - Throws: When no rulesets are retrieved or when the builder fails to build the blocker.
-    public func getContentBlocker(ruleset: Ruleset) async throws -> ContentBlocker {
-        let rulesetData = try await getRuleset(ruleset: ruleset)
-        let builder = ContentBlockerBuilder(rulesetData: RulesetData(meta: ruleset, data: rulesetData))
-        guard let contentBlocker = builder.buildWithExceptions(exceptions: await self.getExceptions()) else {
-            throw AdTrackerBlockerError.failedToDecodeRuleListData
+    ///   - completion: completion handler when the content blocker is available.
+    public func getContentBlocker(ruleset: Ruleset, completion: @escaping (Result<ContentBlocker, Error>) -> Void) {
+        self.getRuleset(ruleset: ruleset) { (getResult) in
+            switch getResult {
+            case .success(let data):
+                let builder = ContentBlockerBuilder(rulesetData: RulesetData(meta: ruleset, data: data))
+                guard let contentBlocker = builder.buildWithExceptions(exceptions: self.getExceptions()) else {
+                    completion(.failure(AdTrackerBlockerError.failedToDecodeRuleListData))
+                    return
+                }
+                completion(.success(contentBlocker))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
-        return contentBlocker
     }
 
     /// Downloads the ruleset from S3. If download succeeds the ruleset is saved to disk.
-    lazy var rulesetDownloadTasks: RulesetDownloadTasks = { return .init() }()
-    private func downloadDataFor(ruleset: Ruleset) async throws -> Data {
-        // Is this ruleset already being downloaded? if so await the result
-        if let existingTask = await rulesetDownloadTasks.taskFor(ruleset: ruleset) {
-            return try await existingTask.value
-        }
-
-        // Create a download task
-        let downloadTask: Task<Data, Error> = Task {
-            let data = try await s3Client.downloadDataFor(ruleset: ruleset, inBucket: config.bucket)
-            return data
-        }
-
-        // cache the download task in our container
-        await rulesetDownloadTasks.addDownloadTask(ruleset: ruleset, task: downloadTask)
-
-        do {
-            // await the result
-            let data = try await downloadTask.value
-
-            // cached data in storage provider.
-            try await self.storageProvider.save(ruleset: ruleset, data: data)
-
-            // remove cached task
-            await rulesetDownloadTasks.removeTaskFor(ruleset: ruleset)
-
-            return data
-        } catch {
-            // on error remove cached task.
-            await rulesetDownloadTasks.removeTaskFor(ruleset: ruleset)
-            // re-throw error.
-            throw error
+    private func downloadDataFor(ruleset: Ruleset, completion: @escaping (Result<Data, Error>) -> Void) {
+        self.s3Client.downloadDataFor(ruleset: ruleset, inBucket: config.bucket) { (downloadResult) in
+            // on successful download save the ruleset to disk
+            if let data = try? downloadResult.get() {
+                try? self.storageProvider.save(ruleset: ruleset, data: data)
+            }
+            completion(downloadResult)
         }
     }
 
     /// Get all exceptions that have been added.
-    public func getExceptions() async -> [BlockingException] {
-        return await self.exceptionProvider.get()
+    public func getExceptions() -> [BlockingException] {
+        return self.exceptionProvider.get()
     }
 
     /// Add new exceptions
     /// - Parameter exceptions: The exceptions to add
-    public func addExceptions(_ exceptions: [BlockingException]) async {
-        await self.exceptionProvider.add(exceptions)
+    public func addExceptions(_ exceptions: [BlockingException]) {
+        self.exceptionProvider.add(exceptions)
     }
 
     /// Removes exceptions
     /// - Parameter exceptions: The exceptions to remove
-    public func removeExceptions(_ exceptions: [BlockingException]) async {
-        await self.exceptionProvider.remove(exceptions)
+    public func removeExceptions(_ exceptions: [BlockingException]) {
+        self.exceptionProvider.remove(exceptions)
     }
 
     /// Removes all exceptions
-    public func removeAllExceptions() async {
-        await self.exceptionProvider.removeAll()
+    public func removeAllExceptions() {
+        self.exceptionProvider.removeAll()
     }
 
-    public func reset() async throws {
-        try await self.storageProvider.reset()
-        await self.exceptionProvider.removeAll()
-    }
-}
-
-actor RulesetDownloadTasks {
-    var downloadTasks: [String: Task<Data, Error>] = [:]
-
-    func addDownloadTask(ruleset: Ruleset, task: Task<Data, Error>) {
-        self.downloadTasks[ruleset.id] = task
-    }
-
-    func removeTaskFor(ruleset: Ruleset) {
-        self.downloadTasks[ruleset.id] = nil
-    }
-
-    func taskFor(ruleset: Ruleset) -> Task<Data, Error>? {
-        return self.downloadTasks[ruleset.id]
+    public func reset() throws {
+        try self.storageProvider.reset()
+        self.exceptionProvider.removeAll()
     }
 }

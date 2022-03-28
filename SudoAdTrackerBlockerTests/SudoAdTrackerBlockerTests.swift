@@ -32,22 +32,27 @@ class SudoAdTrackerBlockerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testListRulesetsReturnsExpectedError() async throws {
+    func testListRulesetsReturnsExpectedError() throws {
 
         // Set the S3 client to return a download error to make sure it's caught
         self.mockS3Client.listObjectsV2InResult = .failure(NSError.some)
 
-        do {
-            let _ = try await self.client.listRulesets()
-            XCTFail("Expected error to be thrown")
-        } catch {
-            XCTAssertEqual(error as NSError, NSError.some)
+        let e = self.expectation(description: "")
+        self.client.listRulesets { (result) in
+            XCTAssertTrue(self.mockS3Client.listObjectsV2InCalled)
+            switch result {
+            case .success:
+                XCTFail()
+            case .failure(let error):
+                XCTAssertEqual(error as NSError, NSError.some)
+            }
+            e.fulfill()
         }
 
-        XCTAssertTrue(self.mockS3Client.listObjectsV2InCalled)
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
 
-    func testListRulesetsReturnsExpectedList() async throws {
+    func testListRulesetsReturnsExpectedList() throws {
         // Set the S3 client to return a known list
         let easyList = AWSS3Object(key: "/ad-tracker-blocker/filter-lists/adblock-plus/AD/easylist.txt", eTag: "froopyland", lastModified: Date(), size: 1)
 
@@ -57,66 +62,106 @@ class SudoAdTrackerBlockerTests: XCTestCase {
 
         // Set the mock data to be returned.
         self.mockS3Client.listObjectsV2InResult = .success(AWSS3ListObjectsV2Output(contents: [easyList, unknownList]))
-        // We only get 1 result even though we passed in 2 objects.  Only one will be converted to a ruleset, the other fails.
-        let list = try await self.client.listRulesets()
-        XCTAssertEqual(list.count, 1)
+
+        let e = self.expectation(description: "")
+        self.client.listRulesets { (result) in
+            XCTAssertTrue(self.mockS3Client.listObjectsV2InCalled)
+            switch result {
+            case .success(let list):
+                // We only get 1 result even though we passed in 2 objects.  Only one will be converted to a ruleset, the other fails.
+                XCTAssertEqual(list.count, 1)
+            case .failure:
+                XCTFail()
+            }
+            e.fulfill()
+        }
+
+        self.waitForExpectations(timeout: 5, handler: nil)
     }
 
-    func testDownloadRuleset() async throws {
+    func testDownloadRuleset() throws {
+        let e = self.expectation(description: "")
+
         let ruleset = Ruleset(id: "Asimov", type: .adBlocking, name: "RulesForRobots", eTag: "tag", lastModified: Date(), size: 1)
 
-        let _ = try await self.client.getRuleset(ruleset: ruleset)
-        // Check the client passed the correct params trying to download the ruleset
-        XCTAssertEqual(self.mockS3Client.downloadDataForParamRuleset?.id, ruleset.id)
-        XCTAssertEqual(self.mockS3Client.downloadDataForParamBucket, self.config.bucket)
+        self.client.getRuleset(ruleset: ruleset) { (result) in
+            // Check the client passed the correct params trying to download the ruleset
+            XCTAssertEqual(self.mockS3Client.downloadDataForParamRuleset?.id, ruleset.id)
+            XCTAssertEqual(self.mockS3Client.downloadDataForParamBucket, self.config.bucket)
+            XCTAssertNotNil(try! result.get())
 
-        // Check the client cached the result
-        await XCTAssertTrueAsync(await self.rulesetProvider.saveCalled)
-        try await XCTAssertEqualAsync(await self.rulesetProvider.saveParamRuleset?.id, ruleset.id)
+            // Check the client cached the result
+            XCTAssertTrue(self.rulesetProvider.saveCalled)
+            XCTAssertEqual(self.rulesetProvider.saveParamRuleset?.id, ruleset.id)
+            e.fulfill()
+        }
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testDownloadRuleset_returnsCachedData() async throws {
+    func testDownloadRuleset_returnsCachedData() throws {
+        let e = self.expectation(description: "")
+
         let ruleset = Ruleset(id: "Asimov", type: .adBlocking, name: "RulesForRobots", eTag: "tag", lastModified: Date(), size: 1)
 
-        let r = RulesetData(meta: ruleset, data: "ruleseAreForTheWeak".data(using: .utf8)!)
-        await self.rulesetProvider.set(readResult: r)
+        self.rulesetProvider.readResult = RulesetData(meta: ruleset, data: "ruleseAreForTheWeak".data(using: .utf8)!)
 
-        let _ = try await self.client.getRuleset(ruleset: ruleset)
-        // Confirm the client didn't attempt to download data
-        XCTAssertFalse(self.mockS3Client.downloadDataForCalled)
-        await XCTAssertTrueAsync(await self.rulesetProvider.readCalled)
+        self.client.getRuleset(ruleset: ruleset) { (result) in
+            // Confirm the client didn't attempt to download data
+            XCTAssertFalse(self.mockS3Client.downloadDataForCalled)
+            XCTAssertTrue(self.rulesetProvider.readCalled)
+
+            XCTAssertNotNil(try! result.get())
+            e.fulfill()
+        }
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testDownloadRuleset_eTagMismatch() async throws {
+    func testDownloadRuleset_eTagMismatch() throws {
+        let e = self.expectation(description: "")
+
         // Same data, different eTag
         let outOfDateRuleset = Ruleset(id: "Asimov", type: .adBlocking, name: "RulesForRobots", eTag: "0", lastModified: Date(), size: 1)
         let latestRuleset = Ruleset(id: "Asimov", type: .adBlocking, name: "RulesForRobots", eTag: "1", lastModified: Date(), size: 1)
 
-        let r = RulesetData(meta: outOfDateRuleset, data: "ruleseAreForTheWeak".data(using: .utf8)!)
-        await self.rulesetProvider.set(readResult: r)
+        self.rulesetProvider.readResult = RulesetData(meta: outOfDateRuleset, data: "ruleseAreForTheWeak".data(using: .utf8)!)
 
-        let _ = try await self.client.getRuleset(ruleset: latestRuleset)
-        // Confirm the client was called to download the data even though it was cached
-        await XCTAssertTrueAsync(await self.rulesetProvider.readCalled)
-        XCTAssertTrue(self.mockS3Client.downloadDataForCalled)
+        self.client.getRuleset(ruleset: latestRuleset) { (result) in
+            // Confirm the client was called to download the data even though it was cached
+            XCTAssertTrue(self.rulesetProvider.readCalled)
+            XCTAssertTrue(self.mockS3Client.downloadDataForCalled)
 
-        await XCTAssertTrueAsync(await self.rulesetProvider.saveCalled)
-        try await XCTAssertEqualAsync(await self.rulesetProvider.saveParamRuleset?.eTag, latestRuleset.eTag)
+            XCTAssertTrue(self.rulesetProvider.saveCalled)
+            XCTAssertEqual(self.rulesetProvider.saveParamRuleset?.eTag, latestRuleset.eTag)
+
+            XCTAssertNotNil(try! result.get())
+            e.fulfill()
+        }
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testDownloadRulesetFails() async throws {
+    func testDownloadRulesetFails() throws {
+        let e = self.expectation(description: "")
+
         let ruleset = Ruleset(id: "Asimov", type: .adBlocking, name: "RulesForRobots", eTag: "tag", lastModified: Date(), size: 1)
 
         self.mockS3Client.downloadDataForResult = .failure(NSError.some)
 
-        do {
-            let _ = try await self.client.getRuleset(ruleset: ruleset)
-            XCTFail("Expected error to be thrown")
-        } catch {
+        self.client.getRuleset(ruleset: ruleset) { (result) in
+            defer {
+                e.fulfill()
+            }
+            // Check the client passed the correct params trying to download the ruleset
+            guard case .failure(let error) = result else {
+                XCTFail()
+                return
+            }
             XCTAssertEqual(error as NSError, NSError.some)
         }
-        
-        XCTAssertTrue(self.mockS3Client.downloadDataForCalled)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 }
 
@@ -149,19 +194,15 @@ extension AWSS3ListObjectsV2Output {
     }
 }
 
-actor MockRulesetStorageProvider: RulesetStorageProvider {
+class MockRulesetStorageProvider: RulesetStorageProvider {
 
     var readCalled = false
     var readParamRuleset: Ruleset?
-    var _readResult: RulesetData?
-    func set(readResult: RulesetData?) {
-        _readResult = readResult
-    }
-
+    var readResult: RulesetData?
     func read(ruleset: Ruleset) -> RulesetData? {
         readCalled = true
         readParamRuleset = ruleset
-        return _readResult
+        return readResult
     }
 
     var saveCalled = false
@@ -183,7 +224,7 @@ actor MockRulesetStorageProvider: RulesetStorageProvider {
     }
 }
 
-actor MockExceptionProvider: ExceptionProvider {
+class MockExceptionProvider: ExceptionProvider {
     var getCalled = false
     var getExceptionResult: [BlockingException] = []
     func get() -> [BlockingException] {

@@ -18,10 +18,10 @@ enum S3Error: Error {
 /// Client to interact with S3
 protocol S3Client {
     /// List files in the S3 bucket
-    func listObjectsV2In(bucket: String) async throws -> AWSS3ListObjectsV2Output
+    func listObjectsV2In(bucket: String, completion: @escaping (Result<AWSS3ListObjectsV2Output, Error>) -> Void)
 
     /// Downloads the ruleset from the S3 bucket
-    func downloadDataFor(ruleset: Ruleset, inBucket bucket: String) async throws -> Data
+    func downloadDataFor(ruleset: Ruleset, inBucket bucket: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
 class DefaultS3Client: S3Client {
@@ -42,7 +42,7 @@ class DefaultS3Client: S3Client {
         // we need the type annotations to force it to be optional and silence compiler warnings of the type
         // "Comparing non-optional value of type to 'nil' always returns false"
         let s3: AWSS3? = AWSS3.s3(forKey: s3Key)
-
+        
         if let s3 = s3 {
             return s3
         } else {
@@ -53,7 +53,7 @@ class DefaultS3Client: S3Client {
 
     private var transferUtility: AWSS3TransferUtility {
         let transferUtilityKey = "com.sudoplatform.adtrackerblocker.awss3"
-
+        
         if let utility = AWSS3TransferUtility.s3TransferUtility(forKey: transferUtilityKey) {
             return utility
         } else {
@@ -63,39 +63,52 @@ class DefaultS3Client: S3Client {
         }
     }
 
-    func listObjectsV2In(bucket: String) async throws -> AWSS3ListObjectsV2Output {
+    func listObjectsV2In(bucket: String, completion: @escaping (Result<AWSS3ListObjectsV2Output, Error>) -> Void) {
         guard let request = AWSS3ListObjectsV2Request() else {
-            throw S3Error.fatalError(description: "Failed to create a request to list S3 objects.")
+            return completion(.failure(S3Error.fatalError(description: "Failed to create a request to list S3 objects.")))
         }
 
         request.bucket = bucket
         request.prefix = self.bucketPrefixFilter
 
-        return try await self.s3.listObjectsV2(request)
+        self.s3.listObjectsV2(request) { (output, error) in
+            if let list = output {
+                completion(.success(list))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(S3Error.fatalError(description: S3Error.missingData)))
+            }
+        }
     }
 
-    func downloadDataFor(ruleset: Ruleset, inBucket bucket: String) async throws -> Data {
+    func downloadDataFor(ruleset: Ruleset, inBucket bucket: String, completion: @escaping (Result<Data, Error>) -> Void) {
         // Add progress updates for debugging.
         let expression = AWSS3TransferUtilityDownloadExpression()
         expression.progressBlock = { (task, progress) in
             Logger.shared.debug("Downloading Ruleset \(ruleset.name) \(Int(progress.fractionCompleted * 100))% complete.")
         }
 
-        return try await withCheckedThrowingContinuation({ continuation in
-            self.transferUtility.downloadData(fromBucket: bucket, key: ruleset.id, expression: expression) { (task, _, data, error) in
-                // unused closure params is `URL` (used if saved to an on disk url).
+        self.transferUtility.downloadData(fromBucket: bucket, key: ruleset.id, expression: expression) { (task, _, data, error) in
+            // unused closure  params is `URL` (used if saved to an on disk url).
+            
+            //https://github.com/aws-amplify/aws-sdk-ios/issues/2053
+            task.setCompletionHandler({ _, _, _, _ in })
 
-                // https://github.com/aws-amplify/aws-sdk-ios/issues/2053
-                task.setCompletionHandler({ _, _, _, _ in })
-
-                if let data = data {
-                    continuation.resume(returning: data)
-                } else if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume(throwing: S3Error.fatalError(description: S3Error.missingData))
-                }
+            if let data = data {
+                completion(.success(data))
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(S3Error.fatalError(description: S3Error.missingData)))
             }
-        })
+        }
+        .continueWith { (task) -> AnyObject? in
+            if let error = task.error {
+                completion(.failure(error))
+            }
+
+            return nil
+        }
     }
 }

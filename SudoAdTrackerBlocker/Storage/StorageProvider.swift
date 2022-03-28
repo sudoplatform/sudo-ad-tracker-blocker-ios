@@ -8,7 +8,7 @@ import Foundation
 import SudoLogging
 
 /// Handles storage of cached rulesets
-protocol RulesetStorageProvider: Actor {
+protocol RulesetStorageProvider {
     func read(ruleset: Ruleset) -> RulesetData?
 
     func save(ruleset: Ruleset, data: Data) throws
@@ -24,10 +24,10 @@ struct RulesetData: Codable {
 
 /// Handles caching of rulesets originating from S3.  By default will store files in ~/cache/Rulesets.
 /// Each ruleset file is stored with the metadata from S3 along with the files data.
-actor FileSystemRulesetStorageProvider: RulesetStorageProvider {
+class FileSystemRulesetStorageProvider: RulesetStorageProvider {
 
     var fileManager: FileManager = FileManager.default
-    let baseStoragePath: URL
+    var baseStoragePath: URL
 
     // Encoder/Decoder to read and write the rule list file format.
     lazy var decoder: JSONDecoder = {
@@ -40,18 +40,16 @@ actor FileSystemRulesetStorageProvider: RulesetStorageProvider {
 
     init(fileManager: FileManager = .default, storageURL: URL? = nil) {
         self.fileManager = fileManager
-        let baseStoragePath = (storageURL ?? fileManager.cachesDirectory).appendingPathComponent("Rulesets")
+        self.baseStoragePath = (storageURL ?? fileManager.cachesDirectory).appendingPathComponent("Rulesets")
 
         // Create the storage directory first.  Writes will fail if the directory doesn't exist.
-        if !fileManager.fileExists(atPath: baseStoragePath.path) {
+        if !fileManager.fileExists(atPath: self.baseStoragePath.path) {
             do {
-                try fileManager.createDirectory(at: baseStoragePath, withIntermediateDirectories: false, attributes: nil)
+                try fileManager.createDirectory(at: self.baseStoragePath, withIntermediateDirectories: false, attributes: nil)
             } catch {
-                Logger.shared.debug("Failed to create rulesets cache directory: \(baseStoragePath). \(error)")
+                Logger.shared.debug("Failed to create rulesets cache directory: \(self.baseStoragePath). \(error)")
             }
         }
-
-        self.baseStoragePath = baseStoragePath
     }
 
     func read(ruleset: Ruleset) -> RulesetData? {
