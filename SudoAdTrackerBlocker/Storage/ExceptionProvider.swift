@@ -6,7 +6,7 @@
 
 import Foundation
 
-protocol ExceptionProvider {
+protocol ExceptionProvider: Actor {
     ///
     /// Retrieves all the stored Blocking Exceptions.
     func get() -> [BlockingException]
@@ -26,7 +26,7 @@ protocol ExceptionProvider {
 }
 
 /// Encapsulates the use of the property wrapper to handle the interactions with Blocking Exceptions
-class DefaultExceptionProvider: ExceptionProvider {
+actor DefaultExceptionProvider: ExceptionProvider {
 
     @FileBacked(name: "RulesetExceptions", storage: FileManager.documentDirectory, defaultValue: [])
     private var _exceptions: [BlockingException]

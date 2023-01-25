@@ -16,7 +16,6 @@ class ContentBlockerBuilder {
         self.rulesetData = rulesetData
     }
 
-
     /// Combines the base ruleset with the provided exception list.
     /// - Parameter exceptions: The exceptions to be applied to the base list
     /// - Returns: A content blocker containing the list plus exceptions.

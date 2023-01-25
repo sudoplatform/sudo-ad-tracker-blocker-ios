@@ -17,16 +17,16 @@ class StorageTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testFileStorage() {
+    func testFileStorage() async throws {
 
         let storage = FileSystemRulesetStorageProvider()
         let ruleSet = Ruleset(id: "/ad-tracker-blocker/filter-lists/adblock-plus/AD/easylist.txt", type: .adBlocking, name: "easylist.txt", eTag: "1", lastModified: Date(), size: 1)
 
         let testFileContents = "Listen to me. I know that new situations can be intimidating. You're lookin’ around and it’s all scary and different, but y’know … meeting them head-on, charging into ‘em like a bull — that’s how we grow as people."
         let data = testFileContents.data(using: .utf8)!
-        try! storage.save(ruleset: ruleSet, data: data)
+        try await storage.save(ruleset: ruleSet, data: data)
 
-        let returnedData = storage.read(ruleset: ruleSet)
+        let returnedData = await storage.read(ruleset: ruleSet)
         guard let readData = returnedData?.data else {
             XCTFail()
             return
@@ -35,25 +35,31 @@ class StorageTests: XCTestCase {
         XCTAssertEqual(String(data: readData, encoding: .utf8), testFileContents)
     }
 
-    func testExceptionsProvider() {
+    func testExceptionsProvider() async {
         let storage = DefaultExceptionProvider()
         let host = BlockingException("host.com")
         let exceptions = [
             BlockingException("page.com/"),
             BlockingException("page2.com")
         ]
-        XCTAssertEqual(storage.get(), [])
+        var array = await storage.get()
+        XCTAssertEqual(array, [])
 
         var exceptionsWithHost = [host]
         exceptionsWithHost.append(contentsOf: exceptions)
 
-        storage.add(exceptionsWithHost)
-        XCTAssertEqual(storage.get(), exceptionsWithHost)
+        await storage.add(exceptionsWithHost)
 
-        storage.remove([host])
-        XCTAssertEqual(storage.get(), exceptions)
+        array = await storage.get()
+        XCTAssertEqual(array, exceptionsWithHost)
 
-        storage.removeAll()
-        XCTAssertEqual(storage.get(), [])
+        await storage.remove([host])
+        
+        array = await storage.get()
+        XCTAssertEqual(array, exceptions)
+
+        await storage.removeAll()
+        array = await storage.get()
+        XCTAssertEqual(array, [])
     }
 }
