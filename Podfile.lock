@@ -30,9 +30,9 @@ PODS:
     - AWSCore (~> 2.27.15)
     - AWSS3 (~> 2.27.15)
     - SudoLogging (~> 1.0)
-  - SudoKeyManager (2.0.0)
+  - SudoKeyManager (2.3.0)
   - SudoLogging (1.0.0)
-  - SudoUser (14.1.0):
+  - SudoUser (15.0.0):
     - AWSAppSync (~> 3.6.1)
     - AWSCognitoIdentityProvider (~> 2.27.15)
     - AWSCore (~> 2.27.15)
@@ -47,7 +47,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.27)
   - SudoConfigManager (~> 3.0)
   - SudoLogging (~> 1.0)
-  - SudoUser (~> 14.0)
+  - SudoUser (~> 15.0)
 
 SPEC REPOS:
   trunk:
@@ -80,9 +80,9 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SudoConfigManager: aee20bc2d03e28342da663ae48378d0daae78f47
-  SudoKeyManager: 64fa72acd541f65d80373c864ae5a6011e8b81b5
+  SudoKeyManager: ce7d8eba742ec1ae156f586097dfa982719e611b
   SudoLogging: 93238a71338292a650804358994c67f8f3816d20
-  SudoUser: d58bda9bf5f138d2ec91d7f4d590c06d5f512298
+  SudoUser: 1b60674a7d1894f48260a077f8ce94bc05b98d8b
 
 PODFILE CHECKSUM: 7960b202beb7530b613992a2deec4f87e2a08e42
 

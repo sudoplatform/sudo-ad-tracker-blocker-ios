@@ -126,12 +126,20 @@ class SudoUserTestHelper {
         let bundle = Bundle(for: type(of: self))
         if let testKeyPath = bundle.path(forResource: "register_key", ofType: "private"),
            let testKeyIdPath = bundle.path(forResource: "register_key", ofType: "id") {
-            let testKey = try String(contentsOfFile: testKeyPath)
+            var testKey = try String(contentsOfFile: testKeyPath)
+            
             let testKeyId = try String(contentsOfFile: testKeyIdPath).trimmingCharacters(in: .whitespacesAndNewlines)
 
             NSLog("Registering with test key id: \(testKeyId)")
             NSLog("Registering with test key: \(testKey)")
-
+            
+            // CI has had a key with spaces in it that appears valid for other platforms.
+            // We can cope with this here for a quick fix.
+            testKey = testKey.replacingOccurrences(of: "-----BEGIN RSA PRIVATE KEY-----", with: "")
+            testKey = testKey.replacingOccurrences(of: "-----END RSA PRIVATE KEY-----", with: "")
+            testKey = testKey.replacingOccurrences(of: " ", with: "")
+            testKey = testKey.replacingOccurrences(of: "\n", with: "")
+            
             self.testAuthenticationProvider = try TESTAuthenticationProvider(
                 name: "testRegisterAudience",
                 key: testKey,
@@ -145,6 +153,7 @@ class SudoUserTestHelper {
 
     func reset() async throws {
         try await self.sudoUserClient.reset()
+        self.testAuthenticationProvider.reset()
         try keyManager.removeAllKeys()
     }
 
