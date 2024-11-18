@@ -38,6 +38,7 @@
 		E20C6B2B27AD885600AB48CE /* AsyncTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */; };
 		E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */; };
 		E2BF3AC426BB368C00A16FD9 /* testConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BF3AC326BB368C00A16FD9 /* testConfig.json */; };
+		E2FC4DEE2A6EED8200566CA6 /* IntegrationTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */; };
 		F7C9E815C94B272ECBD546D7 /* Pods_SudoAdTrackerBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066C895C28D8D11D6F1AC1E /* Pods_SudoAdTrackerBlocker.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTestHelpers.swift; sourceTree = "<group>"; };
 		E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		E2BF3AC326BB368C00A16FD9 /* testConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfig.json; sourceTree = "<group>"; };
+		E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestBase.swift; sourceTree = "<group>"; };
 		ECA7936540FD072F0C0E471E /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +253,7 @@
 			children = (
 				32EA8182256C3DE30086AE07 /* Info.plist */,
 				32EA8180256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift */,
+				E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */,
 			);
 			path = SudoAdTrackerBlockerIntegrationTests;
 			sourceTree = "<group>";
@@ -528,7 +531,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Copying Config\"\ncp -f config/sudoplatformconfig.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n\necho \"Copy test key ID to bundle\"\nSOURCE=${PROJECT_DIR}/config/register_key.id \ncp -f ${SOURCE} \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\n\necho \"Copy test key to bundle\"\nSOURCE=${PROJECT_DIR}/config/register_key.private \ncp -f ${SOURCE} \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\n\necho Files copied:\nls ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n";
+			shellScript = "cp -v -f config/* \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n";
 		};
 		32898B92256C6C9E00E9FDA8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -674,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32EA8181256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift in Sources */,
+				E2FC4DEE2A6EED8200566CA6 /* IntegrationTestBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
