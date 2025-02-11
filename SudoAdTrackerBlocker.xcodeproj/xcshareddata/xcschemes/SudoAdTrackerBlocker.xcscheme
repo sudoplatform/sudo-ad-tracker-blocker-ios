@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3290A53F2562FAD500AAC0A4"
-               BuildableName = "SudoAdTrackerBlocker.framework"
+               BlueprintIdentifier = "SudoAdTrackerBlocker"
+               BuildableName = "SudoAdTrackerBlocker"
                BlueprintName = "SudoAdTrackerBlocker"
-               ReferencedContainer = "container:SudoAdTrackerBlocker.xcodeproj">
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -60,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3290A53F2562FAD500AAC0A4"
-            BuildableName = "SudoAdTrackerBlocker.framework"
+            BlueprintIdentifier = "SudoAdTrackerBlocker"
+            BuildableName = "SudoAdTrackerBlocker"
             BlueprintName = "SudoAdTrackerBlocker"
-            ReferencedContainer = "container:SudoAdTrackerBlocker.xcodeproj">
+            ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

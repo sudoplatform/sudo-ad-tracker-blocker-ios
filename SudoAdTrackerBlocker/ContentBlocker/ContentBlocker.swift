@@ -28,4 +28,3 @@ public struct ContentBlocker {
         self.exceptions = exceptions
     }
 }
-

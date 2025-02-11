@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		320BF6D5257E9F9D004D359F /* MockS3Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320BF6D4257E9F9D004D359F /* MockS3Client.swift */; };
 		320BF725257ED393004D359F /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320BF724257ED393004D359F /* StorageTests.swift */; };
-		325BC6A925887178001AE24C /* ContentBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BC6A825887177001AE24C /* ContentBlocker.swift */; };
 		325BC6D325895AA4001AE24C /* ContentBlockerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325BC6D225895AA4001AE24C /* ContentBlockerBuilderTests.swift */; };
 		327D6A5625897D1E0044137B /* testRuleset.json in Resources */ = {isa = PBXBuildFile; fileRef = 327D6A5525897D1E0044137B /* testRuleset.json */; };
 		32898AF8256C463100E9FDA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32898AF7256C463100E9FDA8 /* AppDelegate.swift */; };
@@ -18,28 +17,14 @@
 		32898AFF256C463100E9FDA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32898AFD256C463100E9FDA8 /* Main.storyboard */; };
 		32898B01256C463400E9FDA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32898B00256C463400E9FDA8 /* Assets.xcassets */; };
 		32898B04256C463400E9FDA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32898B02256C463400E9FDA8 /* LaunchScreen.storyboard */; };
-		3290A54A2562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3290A5402562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework */; };
 		3290A54F2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3290A54E2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift */; };
-		3290A5512562FAD500AAC0A4 /* SudoAdTrackerBlocker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3290A5432562FAD500AAC0A4 /* SudoAdTrackerBlocker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32A94FAE257AA408001AF416 /* AWSRegionTypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A94FAD257AA407001AF416 /* AWSRegionTypeExtensions.swift */; };
 		32EA8181256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA8180256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift */; };
-		32EA8183256C3DE30086AE07 /* SudoAdTrackerBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3290A5402562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework */; };
-		32F1FD3625757D8F00A8FCCE /* DefaultS3Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F1FD3525757D8F00A8FCCE /* DefaultS3Client.swift */; };
-		32F1FD3C2575800B00A8FCCE /* SudoAdTrackerBlockerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F1FD3B2575800B00A8FCCE /* SudoAdTrackerBlockerClient.swift */; };
-		32F1FD482575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F1FD472575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift */; };
-		32F1FD4E2576A59100A8FCCE /* Ruleset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F1FD4D2576A59100A8FCCE /* Ruleset.swift */; };
-		32F1FD542576A63100A8FCCE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F1FD532576A63100A8FCCE /* Logging.swift */; };
-		32F7342E257AC1A5008231FF /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7342D257AC1A5008231FF /* StorageProvider.swift */; };
-		A0F4A2DA91FB10D47470FA70 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20BAA1BBA1086E8C50481C0 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework */; };
-		CA9C3C0025A64D2E009CC3F3 /* ContentBlockerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */; };
-		CE362E9F258BFB56004A56D8 /* ExceptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */; };
-		CE362EAA25912C05004A56D8 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */; };
-		DF542C73F1704718126CEF64 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802191EFB4D150492D14C759 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework */; };
 		E20C6B2B27AD885600AB48CE /* AsyncTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */; };
 		E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */; };
 		E2BF3AC426BB368C00A16FD9 /* testConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BF3AC326BB368C00A16FD9 /* testConfig.json */; };
+		E2CA86AE2D553ABD00FACA3E /* SudoAdTrackerBlocker in Frameworks */ = {isa = PBXBuildFile; productRef = E2CA86AD2D553ABD00FACA3E /* SudoAdTrackerBlocker */; };
+		E2CA86B02D553AC100FACA3E /* SudoAdTrackerBlocker in Frameworks */ = {isa = PBXBuildFile; productRef = E2CA86AF2D553AC100FACA3E /* SudoAdTrackerBlocker */; };
 		E2FC4DEE2A6EED8200566CA6 /* IntegrationTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */; };
-		F7C9E815C94B272ECBD546D7 /* Pods_SudoAdTrackerBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7066C895C28D8D11D6F1AC1E /* Pods_SudoAdTrackerBlocker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,25 +35,9 @@
 			remoteGlobalIDString = 32898AF4256C463100E9FDA8;
 			remoteInfo = TestHost;
 		};
-		3290A54B2562FAD500AAC0A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3290A5372562FAD500AAC0A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3290A53F2562FAD500AAC0A4;
-			remoteInfo = SudoAdTrackerBlocker;
-		};
-		32EA8184256C3DE30086AE07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3290A5372562FAD500AAC0A4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3290A53F2562FAD500AAC0A4;
-			remoteInfo = SudoAdTrackerBlocker;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1748F391807B1D6B6A86AA94 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.release.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.release.xcconfig"; sourceTree = "<group>"; };
-		2D3AD7FC5E1676202A775EC8 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		320BF6D4257E9F9D004D359F /* MockS3Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockS3Client.swift; sourceTree = "<group>"; };
 		320BF724257ED393004D359F /* StorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
 		325BC6A825887177001AE24C /* ContentBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlocker.swift; sourceTree = "<group>"; };
@@ -83,7 +52,6 @@
 		32898B03256C463400E9FDA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32898B05256C463400E9FDA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32898B0D256C464B00E9FDA8 /* TestHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHost.entitlements; sourceTree = "<group>"; };
-		3290A5402562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SudoAdTrackerBlocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3290A5432562FAD500AAC0A4 /* SudoAdTrackerBlocker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudoAdTrackerBlocker.h; sourceTree = "<group>"; };
 		3290A5442562FAD500AAC0A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3290A5492562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudoAdTrackerBlockerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,12 +67,6 @@
 		32F1FD4D2576A59100A8FCCE /* Ruleset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruleset.swift; sourceTree = "<group>"; };
 		32F1FD532576A63100A8FCCE /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		32F7342D257AC1A5008231FF /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
-		665773DBD32197C36DDCEB1F /* Pods-SudoAdTrackerBlocker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker.release.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker/Pods-SudoAdTrackerBlocker.release.xcconfig"; sourceTree = "<group>"; };
-		7066C895C28D8D11D6F1AC1E /* Pods_SudoAdTrackerBlocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudoAdTrackerBlocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		738A3B87C277F947B7AB3BFE /* Pods-SudoAdTrackerBlocker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker.debug.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker/Pods-SudoAdTrackerBlocker.debug.xcconfig"; sourceTree = "<group>"; };
-		802191EFB4D150492D14C759 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A20BAA1BBA1086E8C50481C0 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3A7DAE9913027A854283021 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerBuilder.swift; sourceTree = "<group>"; };
 		CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionProvider.swift; sourceTree = "<group>"; };
 		CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
@@ -112,7 +74,6 @@
 		E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		E2BF3AC326BB368C00A16FD9 /* testConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfig.json; sourceTree = "<group>"; };
 		E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestBase.swift; sourceTree = "<group>"; };
-		ECA7936540FD072F0C0E471E /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,20 +84,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3290A53D2562FAD500AAC0A4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F7C9E815C94B272ECBD546D7 /* Pods_SudoAdTrackerBlocker.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3290A5462562FAD500AAC0A4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3290A54A2562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework in Frameworks */,
-				DF542C73F1704718126CEF64 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework in Frameworks */,
+				E2CA86AE2D553ABD00FACA3E /* SudoAdTrackerBlocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EA8183256C3DE30086AE07 /* SudoAdTrackerBlocker.framework in Frameworks */,
-				A0F4A2DA91FB10D47470FA70 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework in Frameworks */,
+				E2CA86B02D553AC100FACA3E /* SudoAdTrackerBlocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,15 +143,13 @@
 				32EA817F256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests */,
 				32898AF6256C463100E9FDA8 /* TestHost */,
 				3290A5412562FAD500AAC0A4 /* Products */,
-				A43F23E0BBD900251BEC20BE /* Pods */,
-				F0F053F207A26EA99E53169F /* Frameworks */,
+				E2CA86AC2D553ABD00FACA3E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		3290A5412562FAD500AAC0A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3290A5402562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework */,
 				3290A5492562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.xctest */,
 				32EA817E256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.xctest */,
 				32898AF5256C463100E9FDA8 /* TestHost.app */,
@@ -268,19 +217,6 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
-		A43F23E0BBD900251BEC20BE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				738A3B87C277F947B7AB3BFE /* Pods-SudoAdTrackerBlocker.debug.xcconfig */,
-				665773DBD32197C36DDCEB1F /* Pods-SudoAdTrackerBlocker.release.xcconfig */,
-				B3A7DAE9913027A854283021 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.debug.xcconfig */,
-				1748F391807B1D6B6A86AA94 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.release.xcconfig */,
-				ECA7936540FD072F0C0E471E /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig */,
-				2D3AD7FC5E1676202A775EC8 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		E2BF3AC026BB2F2700A16FD9 /* ConfigTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,28 +226,14 @@
 			path = ConfigTests;
 			sourceTree = "<group>";
 		};
-		F0F053F207A26EA99E53169F /* Frameworks */ = {
+		E2CA86AC2D553ABD00FACA3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7066C895C28D8D11D6F1AC1E /* Pods_SudoAdTrackerBlocker.framework */,
-				802191EFB4D150492D14C759 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerTests.framework */,
-				A20BAA1BBA1086E8C50481C0 /* Pods_SudoAdTrackerBlocker_SudoAdTrackerBlockerIntegrationTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		3290A53B2562FAD500AAC0A4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3290A5512562FAD500AAC0A4 /* SudoAdTrackerBlocker.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		32898AF4256C463100E9FDA8 /* TestHost */ = {
@@ -332,40 +254,18 @@
 			productReference = 32898AF5256C463100E9FDA8 /* TestHost.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3290A53F2562FAD500AAC0A4 /* SudoAdTrackerBlocker */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3290A5542562FAD500AAC0A4 /* Build configuration list for PBXNativeTarget "SudoAdTrackerBlocker" */;
-			buildPhases = (
-				10542035F0D18A23DD319B4F /* [CP] Check Pods Manifest.lock */,
-				3290A53B2562FAD500AAC0A4 /* Headers */,
-				3290A53C2562FAD500AAC0A4 /* Sources */,
-				3290A53D2562FAD500AAC0A4 /* Frameworks */,
-				3290A53E2562FAD500AAC0A4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SudoAdTrackerBlocker;
-			productName = SudoAdTrackerBlocker;
-			productReference = 3290A5402562FAD500AAC0A4 /* SudoAdTrackerBlocker.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		3290A5482562FAD500AAC0A4 /* SudoAdTrackerBlockerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3290A5572562FAD500AAC0A4 /* Build configuration list for PBXNativeTarget "SudoAdTrackerBlockerTests" */;
 			buildPhases = (
-				C934CD211C2C40E4ED610DE2 /* [CP] Check Pods Manifest.lock */,
 				3290A5452562FAD500AAC0A4 /* Sources */,
 				3290A5462562FAD500AAC0A4 /* Frameworks */,
 				3290A5472562FAD500AAC0A4 /* Resources */,
-				AF2A6319F4EC38959D747AEC /* [CP] Embed Pods Frameworks */,
 				32898B92256C6C9E00E9FDA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3290A54C2562FAD500AAC0A4 /* PBXTargetDependency */,
 			);
 			name = SudoAdTrackerBlockerTests;
 			productName = SudoAdTrackerBlockerTests;
@@ -376,17 +276,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32EA8188256C3DE30086AE07 /* Build configuration list for PBXNativeTarget "SudoAdTrackerBlockerIntegrationTests" */;
 			buildPhases = (
-				CA5ED148EB27AE9D82130718 /* [CP] Check Pods Manifest.lock */,
 				32EA817A256C3DE30086AE07 /* Sources */,
 				32EA817B256C3DE30086AE07 /* Frameworks */,
-				080F3B3A6529134D3475D3C5 /* [CP] Embed Pods Frameworks */,
 				32EA817C256C3DE30086AE07 /* Resources */,
 				32898B8D256C66A500E9FDA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				32EA8185256C3DE30086AE07 /* PBXTargetDependency */,
 				32898B0F256C469C00E9FDA8 /* PBXTargetDependency */,
 			);
 			name = SudoAdTrackerBlockerIntegrationTests;
@@ -405,10 +302,6 @@
 				TargetAttributes = {
 					32898AF4256C463100E9FDA8 = {
 						CreatedOnToolsVersion = 12.2;
-					};
-					3290A53F2562FAD500AAC0A4 = {
-						CreatedOnToolsVersion = 12.0;
-						LastSwiftMigration = 1220;
 					};
 					3290A5482562FAD500AAC0A4 = {
 						CreatedOnToolsVersion = 12.0;
@@ -432,7 +325,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3290A53F2562FAD500AAC0A4 /* SudoAdTrackerBlocker */,
 				3290A5482562FAD500AAC0A4 /* SudoAdTrackerBlockerTests */,
 				32EA817D256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests */,
 				32898AF4256C463100E9FDA8 /* TestHost */,
@@ -448,13 +340,6 @@
 				32898B04256C463400E9FDA8 /* LaunchScreen.storyboard in Resources */,
 				32898B01256C463400E9FDA8 /* Assets.xcassets in Resources */,
 				32898AFF256C463100E9FDA8 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3290A53E2562FAD500AAC0A4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,45 +362,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		080F3B3A6529134D3475D3C5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		10542035F0D18A23DD319B4F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SudoAdTrackerBlocker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		32898B8D256C66A500E9FDA8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -567,67 +413,6 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"Copying Config\"\ncp -f config/sudoplatformconfig.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n\necho \"Copy test key ID to bundle\"\nSOURCE=${PROJECT_DIR}/config/register_key.id \ncp -f ${SOURCE} \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\n\necho \"Copy test key to bundle\"\nSOURCE=${PROJECT_DIR}/config/register_key.private \ncp -f ${SOURCE} \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\n\necho Files copied:\nls ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\n";
 		};
-		AF2A6319F4EC38959D747AEC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C934CD211C2C40E4ED610DE2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CA5ED148EB27AE9D82130718 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -638,24 +423,6 @@
 				32898AFC256C463100E9FDA8 /* ViewController.swift in Sources */,
 				32898AF8256C463100E9FDA8 /* AppDelegate.swift in Sources */,
 				32898AFA256C463100E9FDA8 /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3290A53C2562FAD500AAC0A4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				32F1FD4E2576A59100A8FCCE /* Ruleset.swift in Sources */,
-				CE362E9F258BFB56004A56D8 /* ExceptionProvider.swift in Sources */,
-				CA9C3C0025A64D2E009CC3F3 /* ContentBlockerBuilder.swift in Sources */,
-				32F1FD542576A63100A8FCCE /* Logging.swift in Sources */,
-				325BC6A925887178001AE24C /* ContentBlocker.swift in Sources */,
-				32F1FD482575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift in Sources */,
-				32A94FAE257AA408001AF416 /* AWSRegionTypeExtensions.swift in Sources */,
-				32F1FD3C2575800B00A8FCCE /* SudoAdTrackerBlockerClient.swift in Sources */,
-				CE362EAA25912C05004A56D8 /* FileManagerExtensions.swift in Sources */,
-				32F1FD3625757D8F00A8FCCE /* DefaultS3Client.swift in Sources */,
-				32F7342E257AC1A5008231FF /* StorageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,16 +455,6 @@
 			isa = PBXTargetDependency;
 			target = 32898AF4256C463100E9FDA8 /* TestHost */;
 			targetProxy = 32898B0E256C469C00E9FDA8 /* PBXContainerItemProxy */;
-		};
-		3290A54C2562FAD500AAC0A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3290A53F2562FAD500AAC0A4 /* SudoAdTrackerBlocker */;
-			targetProxy = 3290A54B2562FAD500AAC0A4 /* PBXContainerItemProxy */;
-		};
-		32EA8185256C3DE30086AE07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3290A53F2562FAD500AAC0A4 /* SudoAdTrackerBlocker */;
-			targetProxy = 32EA8184256C3DE30086AE07 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -889,66 +646,8 @@
 			};
 			name = Release;
 		};
-		3290A5552562FAD500AAC0A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 738A3B87C277F947B7AB3BFE /* Pods-SudoAdTrackerBlocker.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU2W43R8JA;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SudoAdTrackerBlocker/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sudoplatform.SudoAdTrackerBlocker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3290A5562562FAD500AAC0A4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 665773DBD32197C36DDCEB1F /* Pods-SudoAdTrackerBlocker.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU2W43R8JA;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SudoAdTrackerBlocker/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sudoplatform.SudoAdTrackerBlocker;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		3290A5582562FAD500AAC0A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3A7DAE9913027A854283021 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -969,7 +668,6 @@
 		};
 		3290A5592562FAD500AAC0A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1748F391807B1D6B6A86AA94 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -990,7 +688,6 @@
 		};
 		32EA8186256C3DE30086AE07 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECA7936540FD072F0C0E471E /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1012,7 +709,6 @@
 		};
 		32EA8187256C3DE30086AE07 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D3AD7FC5E1676202A775EC8 /* Pods-SudoAdTrackerBlocker-SudoAdTrackerBlockerIntegrationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1053,15 +749,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3290A5542562FAD500AAC0A4 /* Build configuration list for PBXNativeTarget "SudoAdTrackerBlocker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3290A5552562FAD500AAC0A4 /* Debug */,
-				3290A5562562FAD500AAC0A4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3290A5572562FAD500AAC0A4 /* Build configuration list for PBXNativeTarget "SudoAdTrackerBlockerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1081,6 +768,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E2CA86AD2D553ABD00FACA3E /* SudoAdTrackerBlocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SudoAdTrackerBlocker;
+		};
+		E2CA86AF2D553AC100FACA3E /* SudoAdTrackerBlocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SudoAdTrackerBlocker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3290A5372562FAD500AAC0A4 /* Project object */;
 }

@@ -76,8 +76,7 @@ class ContentBlockerBuilder {
             // Make sure exceptions in the form of "*google.com" don't have an extra * added.
             if $0.first == "*" {
                 return "\"\($0.lowercased())\""
-            }
-            else {
+            } else {
                 return "\"*\($0.lowercased())\""
             }
         }

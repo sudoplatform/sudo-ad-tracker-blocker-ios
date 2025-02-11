@@ -77,7 +77,7 @@ class DefaultS3Client: S3Client {
     func downloadDataFor(ruleset: Ruleset, inBucket bucket: String) async throws -> Data {
         // Add progress updates for debugging.
         let expression = AWSS3TransferUtilityDownloadExpression()
-        expression.progressBlock = { (task, progress) in
+        expression.progressBlock = { (_, progress) in
             Logger.shared.debug("Downloading Ruleset \(ruleset.name) \(Int(progress.fractionCompleted * 100))% complete.")
         }
 
