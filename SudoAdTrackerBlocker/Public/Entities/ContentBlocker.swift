@@ -9,6 +9,8 @@ import Foundation
 /// Represents a base ruleset combined with a list of exceptions.
 public struct ContentBlocker {
 
+    // MARK: - Properties
+
     /// Generated ID of this content blocker. Based on the base ruleset and an exceptions added.
     public let id: String
 
@@ -20,11 +22,4 @@ public struct ContentBlocker {
 
     /// Exceptions applied to the content blocker.
     public let exceptions: [BlockingException]
-
-    internal init(id: String, baseRuleset: Ruleset, rulesetData: String, exceptions: [BlockingException]) {
-        self.id = id
-        self.baseRuleset = baseRuleset
-        self.rulesetData = rulesetData
-        self.exceptions = exceptions
-    }
 }

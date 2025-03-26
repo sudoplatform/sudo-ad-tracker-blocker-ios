@@ -26,7 +26,7 @@ struct RulesetData: Codable {
 /// Each ruleset file is stored with the metadata from S3 along with the files data.
 actor FileSystemRulesetStorageProvider: RulesetStorageProvider {
 
-    var fileManager: FileManager = FileManager.default
+    var fileManager: FileManager
     let baseStoragePath: URL
 
     // Encoder/Decoder to read and write the rule list file format.
@@ -38,7 +38,8 @@ actor FileSystemRulesetStorageProvider: RulesetStorageProvider {
         return JSONEncoder()
     }()
 
-    init(fileManager: FileManager = .default, storageURL: URL? = nil) {
+    init(storageURL: URL? = nil) {
+        let fileManager = FileManager.default
         self.fileManager = fileManager
         let baseStoragePath = (storageURL ?? fileManager.cachesDirectory).appendingPathComponent("Rulesets")
 

@@ -24,8 +24,9 @@ extension Logger {
 }
 
 extension DefaultSudoAdTrackerBlockerClient {
+
     /// The global log level used by the ad tracker blocker client
-    public static var logLevel: SudoLogging.LogLevel {
+    static var logLevel: SudoLogging.LogLevel {
         get {
             return globalLogDriver.logLevel
         }

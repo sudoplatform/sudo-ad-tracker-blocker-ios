@@ -19,7 +19,7 @@
 		32898B04256C463400E9FDA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32898B02256C463400E9FDA8 /* LaunchScreen.storyboard */; };
 		3290A54F2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3290A54E2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift */; };
 		32EA8181256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA8180256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift */; };
-		E20C6B2B27AD885600AB48CE /* AsyncTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */; };
+		419BB8522D76CA9E00836019 /* SudoConfigManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419BB8512D76CA9E00836019 /* SudoConfigManagerMock.swift */; };
 		E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */; };
 		E2BF3AC426BB368C00A16FD9 /* testConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = E2BF3AC326BB368C00A16FD9 /* testConfig.json */; };
 		E2CA86AE2D553ABD00FACA3E /* SudoAdTrackerBlocker in Frameworks */ = {isa = PBXBuildFile; productRef = E2CA86AD2D553ABD00FACA3E /* SudoAdTrackerBlocker */; };
@@ -29,6 +29,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		32898B0E256C469C00E9FDA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3290A5372562FAD500AAC0A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32898AF4256C463100E9FDA8;
+			remoteInfo = TestHost;
+		};
+		41E805672D7FCD7600EBA8B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3290A5372562FAD500AAC0A4 /* Project object */;
 			proxyType = 1;
@@ -57,20 +64,20 @@
 		3290A5492562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudoAdTrackerBlockerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3290A54E2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoAdTrackerBlockerTests.swift; sourceTree = "<group>"; };
 		3290A5502562FAD500AAC0A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32A94FAD257AA407001AF416 /* AWSRegionTypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSRegionTypeExtensions.swift; sourceTree = "<group>"; };
 		32EA817E256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudoAdTrackerBlockerIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EA8180256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoAdTrackerBlockerIntegrationTests.swift; sourceTree = "<group>"; };
 		32EA8182256C3DE30086AE07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32F1FD3525757D8F00A8FCCE /* DefaultS3Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultS3Client.swift; sourceTree = "<group>"; };
+		32F1FD3525757D8F00A8FCCE /* S3Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Client.swift; sourceTree = "<group>"; };
 		32F1FD3B2575800B00A8FCCE /* SudoAdTrackerBlockerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoAdTrackerBlockerClient.swift; sourceTree = "<group>"; };
 		32F1FD472575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoAdTrackerBlockerConfig.swift; sourceTree = "<group>"; };
 		32F1FD4D2576A59100A8FCCE /* Ruleset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruleset.swift; sourceTree = "<group>"; };
-		32F1FD532576A63100A8FCCE /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		32F7342D257AC1A5008231FF /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
+		419BB84B2D76BD4600836019 /* Logger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Extensions.swift"; sourceTree = "<group>"; };
+		419BB84E2D76C59F00836019 /* RulesetTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesetTransformer.swift; sourceTree = "<group>"; };
+		419BB8512D76CA9E00836019 /* SudoConfigManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoConfigManagerMock.swift; sourceTree = "<group>"; };
 		CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerBuilder.swift; sourceTree = "<group>"; };
 		CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionProvider.swift; sourceTree = "<group>"; };
-		CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
-		E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTestHelpers.swift; sourceTree = "<group>"; };
+		CE362EA925912C05004A56D8 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		E2BF3AC326BB368C00A16FD9 /* testConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testConfig.json; sourceTree = "<group>"; };
 		E2FC4DED2A6EED8200566CA6 /* IntegrationTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTestBase.swift; sourceTree = "<group>"; };
@@ -103,23 +110,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		320BF6D3257E9EF1004D359F /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				320BF6D4257E9F9D004D359F /* MockS3Client.swift */,
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
-		325BC6A725887168001AE24C /* ContentBlocker */ = {
-			isa = PBXGroup;
-			children = (
-				325BC6A825887177001AE24C /* ContentBlocker.swift */,
-				CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */,
-			);
-			path = ContentBlocker;
-			sourceTree = "<group>";
-		};
 		32898AF6256C463100E9FDA8 /* TestHost */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,15 +150,11 @@
 		3290A5422562FAD500AAC0A4 /* SudoAdTrackerBlocker */ = {
 			isa = PBXGroup;
 			children = (
-				3290A5432562FAD500AAC0A4 /* SudoAdTrackerBlocker.h */,
-				3290A5442562FAD500AAC0A4 /* Info.plist */,
-				32F1FD532576A63100A8FCCE /* Logging.swift */,
-				32F1FD4D2576A59100A8FCCE /* Ruleset.swift */,
+				419BB8482D76BCFB00836019 /* Internal */,
+				419BB8472D76BCF600836019 /* Public */,
 				32F1FD3B2575800B00A8FCCE /* SudoAdTrackerBlockerClient.swift */,
-				32F1FD472575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift */,
-				325BC6A725887168001AE24C /* ContentBlocker */,
-				32A94F78257AA12A001AF416 /* S3 */,
-				32F7342C257AC197008231FF /* Storage */,
+				3290A5442562FAD500AAC0A4 /* Info.plist */,
+				3290A5432562FAD500AAC0A4 /* SudoAdTrackerBlocker.h */,
 			);
 			path = SudoAdTrackerBlocker;
 			sourceTree = "<group>";
@@ -176,25 +162,11 @@
 		3290A54D2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests */ = {
 			isa = PBXGroup;
 			children = (
-				E2BF3AC026BB2F2700A16FD9 /* ConfigTests */,
-				327D6A5525897D1E0044137B /* testRuleset.json */,
+				419BB84F2D76CA8D00836019 /* Resources */,
+				419BB8532D76CBDB00836019 /* Sources */,
 				3290A5502562FAD500AAC0A4 /* Info.plist */,
-				325BC6D225895AA4001AE24C /* ContentBlockerBuilderTests.swift */,
-				320BF724257ED393004D359F /* StorageTests.swift */,
-				3290A54E2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift */,
-				320BF6D3257E9EF1004D359F /* Mocks */,
-				E20C6B2A27AD885600AB48CE /* AsyncTestHelpers.swift */,
 			);
 			path = SudoAdTrackerBlockerTests;
-			sourceTree = "<group>";
-		};
-		32A94F78257AA12A001AF416 /* S3 */ = {
-			isa = PBXGroup;
-			children = (
-				32A94FAD257AA407001AF416 /* AWSRegionTypeExtensions.swift */,
-				32F1FD3525757D8F00A8FCCE /* DefaultS3Client.swift */,
-			);
-			path = S3;
 			sourceTree = "<group>";
 		};
 		32EA817F256C3DE30086AE07 /* SudoAdTrackerBlockerIntegrationTests */ = {
@@ -207,23 +179,82 @@
 			path = SudoAdTrackerBlockerIntegrationTests;
 			sourceTree = "<group>";
 		};
-		32F7342C257AC197008231FF /* Storage */ = {
+		419BB8472D76BCF600836019 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				32F7342D257AC1A5008231FF /* StorageProvider.swift */,
-				CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */,
-				CE362EA925912C05004A56D8 /* FileManagerExtensions.swift */,
+				419BB8492D76BD0B00836019 /* Entities */,
 			);
-			path = Storage;
+			path = Public;
 			sourceTree = "<group>";
 		};
-		E2BF3AC026BB2F2700A16FD9 /* ConfigTests */ = {
+		419BB8482D76BCFB00836019 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				E2BF3AC326BB368C00A16FD9 /* testConfig.json */,
-				E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */,
+				419BB84C2D76BD6800836019 /* Utilities */,
+				419BB84A2D76BD3500836019 /* Extensions */,
 			);
-			path = ConfigTests;
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		419BB8492D76BD0B00836019 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				325BC6A825887177001AE24C /* ContentBlocker.swift */,
+				32F1FD4D2576A59100A8FCCE /* Ruleset.swift */,
+				32F1FD472575E69F00A8FCCE /* SudoAdTrackerBlockerConfig.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		419BB84A2D76BD3500836019 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE362EA925912C05004A56D8 /* FileManager+Extensions.swift */,
+				419BB84B2D76BD4600836019 /* Logger+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		419BB84C2D76BD6800836019 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CA9C3BFF25A64D2E009CC3F3 /* ContentBlockerBuilder.swift */,
+				CE362E9E258BFB56004A56D8 /* ExceptionProvider.swift */,
+				32F1FD3525757D8F00A8FCCE /* S3Client.swift */,
+				32F7342D257AC1A5008231FF /* StorageProvider.swift */,
+				419BB84E2D76C59F00836019 /* RulesetTransformer.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		419BB84F2D76CA8D00836019 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				327D6A5525897D1E0044137B /* testRuleset.json */,
+				E2BF3AC326BB368C00A16FD9 /* testConfig.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		419BB8502D76CA9400836019 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E2BF3AC126BB2F4000A16FD9 /* ConfigTests.swift */,
+				320BF6D4257E9F9D004D359F /* MockS3Client.swift */,
+				419BB8512D76CA9E00836019 /* SudoConfigManagerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		419BB8532D76CBDB00836019 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				419BB8502D76CA9400836019 /* Mocks */,
+				325BC6D225895AA4001AE24C /* ContentBlockerBuilderTests.swift */,
+				320BF724257ED393004D359F /* StorageTests.swift */,
+				3290A54E2562FAD500AAC0A4 /* SudoAdTrackerBlockerTests.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		E2CA86AC2D553ABD00FACA3E /* Frameworks */ = {
@@ -261,11 +292,12 @@
 				3290A5452562FAD500AAC0A4 /* Sources */,
 				3290A5462562FAD500AAC0A4 /* Frameworks */,
 				3290A5472562FAD500AAC0A4 /* Resources */,
-				32898B92256C6C9E00E9FDA8 /* ShellScript */,
+				32898B92256C6C9E00E9FDA8 /* Copy Config to Bundle */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				41E805682D7FCD7600EBA8B9 /* PBXTargetDependency */,
 			);
 			name = SudoAdTrackerBlockerTests;
 			productName = SudoAdTrackerBlockerTests;
@@ -279,7 +311,7 @@
 				32EA817A256C3DE30086AE07 /* Sources */,
 				32EA817B256C3DE30086AE07 /* Frameworks */,
 				32EA817C256C3DE30086AE07 /* Resources */,
-				32898B8D256C66A500E9FDA8 /* ShellScript */,
+				32898B8D256C66A500E9FDA8 /* Copy Config to Bundle */,
 			);
 			buildRules = (
 			);
@@ -305,6 +337,7 @@
 					};
 					3290A5482562FAD500AAC0A4 = {
 						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 32898AF4256C463100E9FDA8;
 					};
 					32EA817D256C3DE30086AE07 = {
 						CreatedOnToolsVersion = 12.2;
@@ -362,7 +395,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		32898B8D256C66A500E9FDA8 /* ShellScript */ = {
+		32898B8D256C66A500E9FDA8 /* Copy Config to Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -371,6 +404,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Copy Config to Bundle";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -379,7 +413,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cp -v -f config/* \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n";
 		};
-		32898B92256C6C9E00E9FDA8 /* ShellScript */ = {
+		32898B92256C6C9E00E9FDA8 /* Copy Config to Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -388,6 +422,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Copy Config to Bundle";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -431,7 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				325BC6D325895AA4001AE24C /* ContentBlockerBuilderTests.swift in Sources */,
-				E20C6B2B27AD885600AB48CE /* AsyncTestHelpers.swift in Sources */,
+				419BB8522D76CA9E00836019 /* SudoConfigManagerMock.swift in Sources */,
 				320BF725257ED393004D359F /* StorageTests.swift in Sources */,
 				320BF6D5257E9F9D004D359F /* MockS3Client.swift in Sources */,
 				E2BF3AC226BB2F4000A16FD9 /* ConfigTests.swift in Sources */,
@@ -455,6 +490,11 @@
 			isa = PBXTargetDependency;
 			target = 32898AF4256C463100E9FDA8 /* TestHost */;
 			targetProxy = 32898B0E256C469C00E9FDA8 /* PBXContainerItemProxy */;
+		};
+		41E805682D7FCD7600EBA8B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32898AF4256C463100E9FDA8 /* TestHost */;
+			targetProxy = 41E805672D7FCD7600EBA8B9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -663,6 +703,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHost";
 			};
 			name = Debug;
 		};
@@ -683,6 +724,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TestHost";
 			};
 			name = Release;
 		};

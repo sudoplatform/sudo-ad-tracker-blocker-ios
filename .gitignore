@@ -27,3 +27,4 @@ node_modules
 .build/
 docs/
 .jazzy.yaml
+/Package.resolved
